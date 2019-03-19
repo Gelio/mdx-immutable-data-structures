@@ -2,6 +2,7 @@ import { future as theme } from 'mdx-deck/themes';
 import codeHighlightStyle from 'react-syntax-highlighter/styles/prism/tomorrow';
 import prismTypescript from 'react-syntax-highlighter/languages/prism/typescript';
 import prismTsx from 'react-syntax-highlighter/languages/prism/tsx';
+import oceanicNext from 'prism-react-renderer/themes/oceanicNext';
 
 export default {
   ...theme,
@@ -11,6 +12,9 @@ export default {
       typescript: prismTypescript,
       tsx: prismTsx,
     },
+  },
+  codeSurfer: {
+    ...oceanicNext,
   },
 
   // Customize your presentation theme here.

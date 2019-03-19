@@ -1,46 +1,220 @@
 import { Head, Code, Appear, components as Components } from 'mdx-deck'
 import { FullscreenCode, Split, SplitRight } from 'mdx-deck/layouts'
+import { CodeSurfer } from 'mdx-deck-code-surfer'
 
+import ImageWithLabel from './components/image-with-label'
 export { default as theme } from './theme'
 
 <Head>
-  <title>Presentation title</title>
+  <title>Immutable data structures</title>
 </Head>
 
-# Presentation title
+# Immutable data structures
 
-Author: XYZ
+Author: Grzegorz Rozdzialik
 
 ---
 
-export default SplitRight
+## Agenda
 
-## Task for today
+1. Mutability vs immutability
+2. Performance implications
+3. _ImmutableJS_ - implementation of immutable data structures
+4. Usage in the React ecosystem
 
-Using a different layout
+---
 
-- List item 1
-- List item 2
+## Mutability
+
+---
+
+<ImageWithLabel label="Mutability in jQuery land">
+  <img src="./static/jquery.jpg" />
+</ImageWithLabel>
+
+---
+
+## Mutating state
+
+<div class="counter" style={{ fontSize: '2em' }}>
+  <span class="counter__value">0</span>
+  <button class="counter__increment" style={{ fontSize: '1em' }}>
+    +
+  </button>
+</div>
+
+```html
+<div class="counter">
+  <span class="counter__value">0</span>
+  <button class="counter__increment">+</button>
+</div>
+```
+
+---
+
+<CodeSurfer
+  steps={[{}, { lines: [5, 6], notes: 'Direct mutation of DOM nodes' }]}
+  code={require('!raw-loader!./snippets/1-simple-mutation.js')}
+/>
+
+---
+
+<CodeSurfer
+  title="Extracted state"
+  steps={[
+    {},
+    { lines: [1, 4], notes: 'Explicit state' },
+    { lines: [6], notes: 'Independent update based on state' },
+  ]}
+  code={require('!raw-loader!./snippets/2-explicit-state.js')}
+/>
+
+---
+
+<CodeSurfer
+  title="Update function"
+  steps={[
+    {},
+    { lines: [4], notes: 'Update state' },
+    { lines: [6], range: [9, 11], notes: 'Function that updates the UI' },
+    { notes: 'A familiar pattern, is it not?' },
+  ]}
+  code={require('!raw-loader!./snippets/3-updater-function.js')}
+/>
+
+---
+
+<CodeSurfer
+  title="More state - counter name"
+  steps={[{}, { lines: [2], notes: 'Input for counter name' }]}
+  code={require('!raw-loader!./snippets/4-counter-name.html')}
+/>
+
+---
+
+<CodeSurfer
+  title="Counter name handling in JS"
+  steps={[
+    {},
+    { lines: [2], notes: 'Variable for the name' },
+    {
+      range: [10, 14],
+      notes: 'onChange handler',
+    },
+    { lines: [18], notes: 'Update UI with the name' },
+    {
+      lines: [17, 18],
+      notes: 'Independent update operations - could be split',
+    },
+  ]}
+  code={require('!raw-loader!./snippets/4-counter-name.js')}
+/>
+
+---
+
+<CodeSurfer
+  title="Split update functions"
+  steps={[{}, { range: [16, 27] }]}
+  code={require('!raw-loader!./snippets/5-split-update-functions.js')}
+/>
+
+---
+
+<CodeSurfer
+  title="State object"
+  steps={[
+    {},
+    { range: [1, 4] },
+    { lines: [9, 15], notes: 'Pass state to update functions' },
+    { range: [18, 29] },
+  ]}
+  code={require('!raw-loader!./snippets/6-state-object.js')}
+/>
+
+---
+
+<CodeSurfer
+  title="Simulate expensive updates"
+  steps={[
+    {},
+    { range: [23, 29], notes: "Computing Fibonacci's numbers" },
+    { range: [31, 34] },
+    { lines: [32], notes: 'Now each update is expensive' },
+  ]}
+  code={require('!raw-loader!./snippets/7-expensive-computation.js')}
+/>
+
+---
+
+## How to fix the problem?
+
+1. Ignore update if `counterState.value` has not changed
+2. Only call `updateCounterValue` when the value is actually changed
 
 ```notes
-Presenter notes are also available
+Preferred solution = 1
 ```
 
 ---
 
-## A regular slide
+<CodeSurfer
+  title="Compare states after update"
+  steps={[
+    {},
+    { lines: [5], notes: 'Store previous state' },
+    {
+      range: [7, 25],
+    },
+    { ranges: [[8, 12], [18, 22]], notes: 'Update state' },
+    { lines: [14, 24], notes: 'Pass previous state for comparison' },
+    {
+      range: [40, 55],
+    },
+    {
+      ranges: [[41, 43], [50, 52]],
+      notes: 'Ignore update if state did not change',
+    },
+  ]}
+  code={require('!raw-loader!./snippets/8-compare-state.js')}
+/>
 
-```js
-const withSome = 'code'
-```
+---
 
-```tsx
-interface AlsoTypescript {
-  a: number
-}
+<CodeSurfer
+  title="Immutable updates in action"
+  steps={[
+    {},
+    {
+      range: [2, 6],
+    },
+    {
+      lines: [2],
+      notes: 'Current state is used as previous state',
+    },
+    {
+      lines: [3, 4, 6],
+      notes: 'State is cloned (shallowly)',
+    },
+    {
+      lines: [5],
+      notes: 'Cloned state is updated',
+    },
+  ]}
+  code={require('!raw-loader!./snippets/9-immutable-update.js')}
+/>
 
-const AndTSX = <div />
-```
+---
+
+TODO: images that visualize updates
+
+---
+
+## Immutability characteristics
+
+1. Shallow comparison (`===`) can be used to detect changes
+2. Once acquired object will **never** change (repeatable reads)
+3. When a child is updated, the parent also changes.
+4. More efficient than deep cloning
 
 ---
 
