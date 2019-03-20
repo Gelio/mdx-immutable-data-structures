@@ -205,7 +205,29 @@ Preferred solution = 1
 
 ---
 
-TODO: images that visualize updates
+## State example
+
+<img src="./static/state-example.svg" />
+
+---
+
+<img src="./static/state-example-before-update.svg" />
+
+---
+
+<img src="./static/state-example-after-update.svg" />
+
+```notes
+Only marked elements will change (=== will return false)
+```
+
+---
+
+<img src="./static/state-example-before-next-update.svg" />
+
+---
+
+<img src="./static/state-example-after-next-update.svg" />
 
 ---
 
@@ -213,8 +235,216 @@ TODO: images that visualize updates
 
 1. Shallow comparison (`===`) can be used to detect changes
 2. Once acquired object will **never** change (repeatable reads)
-3. When a child is updated, the parent also changes.
+3. When a child is updated, the parent also changes. Siblings are not updated
 4. More efficient than deep cloning
+
+---
+
+#### 1. Shallow comparison (`===`) can be used to detect changes
+
+```js
+const initialState = {
+  user: {
+    name: 'Bob',
+    age: 42,
+  },
+  counter: 5,
+}
+
+const updatedState = {
+  ...initialState,
+  counter: 6,
+}
+
+initialState.user === updatedState.user // true
+```
+
+---
+
+#### 2. Once acquired object will **never** change (repeatable reads)
+
+```js
+const initialState = {
+  user: {
+    name: 'Bob',
+    age: 42,
+  },
+  counter: 5,
+}
+
+const updatedState = {
+  ...initialState,
+  counter: 6,
+}
+
+setInterval(() => console.log(initialState.counter), 50)
+// always prints 5
+```
+
+---
+
+#### 3. When a child is updated, the parent also changes. Siblings are not updated
+
+---
+
+#### 4. More efficient than deep cloning
+
+---
+
+#### Update only what is necessary
+
+<img src="./static/state-example-after-next-update.svg" />
+
+---
+
+#### Deep clone
+
+<img src="./static/state-example-deep-clone.svg" />
+
+---
+
+### Immutable data structures in plain JS
+
+- objects (maps/dictionaries)
+- lists (arrays)
+- sets (objects)
+
+---
+
+#### Objects (maps/dictionaries)
+
+```js
+const initialState = {
+  user: {
+    name: 'Bob',
+    age: 42,
+  },
+  counter: 5,
+}
+
+const updatedState = {
+  ...initialState,
+  counter: 6,
+}
+```
+
+---
+
+<CodeSurfer
+  title="Updating deeply nested properties"
+  steps={[
+    {},
+    { range: [12, 21] },
+    { lines: [13, 15, 17], notes: 'Make sure not to forget those' },
+  ]}
+  code={require('!raw-loader!./snippets/10-deeply-nested-properties.js')}
+/>
+
+---
+
+#### Lists (arrays)
+
+```js
+const initialState = [1, 2, 3]
+
+const updatedState = [0, ...initialState, 4, 5, 6]
+```
+
+---
+
+#### Removing from a list
+
+```js
+const initialState = [1, 2, 3]
+
+// Remove `2` from the array
+const index = 1
+const updatedState = [
+  ...initialState.slice(0, index),
+  ...initialState.slice(index + 1),
+]
+```
+
+---
+
+#### Sets
+
+```js
+const initialState = {
+  Alice: true,
+  Bob: true,
+}
+
+const updatedState = {
+  ...initialState,
+  Candace: true,
+}
+
+console.log(updatedState.Candace) // true
+console.log(updatedState.Danny) // undefined
+```
+
+---
+
+#### Removing from a set
+
+```js
+const initialState = {
+  Alice: true,
+  Bob: true,
+}
+
+// Method 1
+const updatedState1 = {
+  ...initialState,
+  Alice: false,
+}
+
+// Method 2
+const updatedState2 = {
+  ...initialState,
+}
+delete updatedState2.Alice
+```
+
+---
+
+## Conclusion
+
+Plain Javascript data structures may be difficult to work with.
+
+---
+
+<ImageWithLabel label="ImmutableJS">
+  <img src="./static/immutablejs.png" />
+</ImageWithLabel>
+
+- implementation of immutable data structures
+- easy API for deeply nested properties
+- optimized
+- many helper methods (_lodash_ for immutables)
+
+Docs: https://immutable-js.github.io/immutable-js/
+
+---
+
+#### Maps
+
+TODO: describe ImmutableJS API
+
+---
+
+#### Lists
+
+---
+
+#### Sets
+
+---
+
+#### Many more
+
+---
 
 ---
 
