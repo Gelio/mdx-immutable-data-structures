@@ -428,9 +428,56 @@ Docs: https://immutable-js.github.io/immutable-js/
 
 ---
 
-#### Maps
+<CodeSurfer
+  title="Immutable Maps"
+  steps={[
+    { lines: [1], notes: "Important! Import Map (do not use ES6's Map)" },
+    { range: [3, 6], notes: 'Create an immutable Map' },
+    { range: [3, 10] },
+    { lines: [8], notes: 'Try to change a property' },
+    { range: [3, 17] },
+    { lines: [13], notes: 'Updating an immutable Map creates a new Map' },
+    { lines: [16], notes: 'The value is persisted' },
+    { lines: [15], notes: 'Old value is kept' },
+    { lines: [17], notes: 'Easy to compare if there are changes' },
+    { range: [10, 17] },
+  ]}
+  code={require('!raw-loader!./snippets/11-immutable-map.js')}
+/>
 
-TODO: describe ImmutableJS API
+---
+
+<CodeSurfer
+  title="Nested properties in Maps"
+  steps={[
+    {},
+    {
+      range: [3, 21],
+      notes: 'Map from a deep JS object',
+    },
+    {
+      range: [3, 28],
+      notes: 'Only the first level is immutable',
+    },
+    {
+      range: [30, 48],
+      notes: 'Shorthand for converting JS values to Immutable ones',
+    },
+    {
+      range: [30, 51],
+      notes: 'Accessing nested properties one by one',
+    },
+    {
+      ranges: [[53, 58]],
+      notes: 'Another way + a shorthand to set',
+    },
+    {
+      ranges: [[59, 62]],
+      notes: 'Updater function - based on previous value',
+    },
+  ]}
+  code={require('!raw-loader!./snippets/12-immutable-map-nested.js')}
+/>
 
 ---
 
@@ -453,3 +500,7 @@ TODO: describe ImmutableJS API
 ---
 
 Thank you for your participation.
+
+```
+
+```
