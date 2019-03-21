@@ -15,3 +15,5 @@ const updatedState = initialState.set('counterValue', 6);
 console.log(initialState.get('counterValue')); // 5
 console.log(updatedState.get('counterValue')); // 6
 console.log(initialState === updatedState); // false
+
+const statePlainJsObject = updatedState.toJS();

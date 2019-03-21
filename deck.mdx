@@ -428,6 +428,17 @@ Docs: https://immutable-js.github.io/immutable-js/
 
 ---
 
+### Structures in ImmutableJS
+
+- Map + OrderedMap
+- Record
+- Set + OrderedSet
+- Stack
+- List
+- Seq
+
+---
+
 <CodeSurfer
   title="Immutable Maps"
   steps={[
@@ -441,6 +452,7 @@ Docs: https://immutable-js.github.io/immutable-js/
     { lines: [15], notes: 'Old value is kept' },
     { lines: [17], notes: 'Easy to compare if there are changes' },
     { range: [10, 17] },
+    { lines: [19], notes: 'Convert from Immutable to plain JS object' },
   ]}
   code={require('!raw-loader!./snippets/11-immutable-map.js')}
 />
@@ -481,11 +493,51 @@ Docs: https://immutable-js.github.io/immutable-js/
 
 ---
 
-#### Lists
+<CodeSurfer
+  title="Immutable Lists"
+  steps={[
+    {},
+    {
+      range: [1, 3],
+    },
+    {
+      range: [3, 5],
+      notes: 'Immutable updates',
+    },
+    {
+      range: [7, 8],
+      notes: 'Accessing data',
+    },
+    {
+      lines: [10, 11, 12],
+      notes: 'Many utility methods availble on Lists',
+    },
+    { lines: [13], notes: 'Convert back to a plain JS array' },
+  ]}
+  code={require('!raw-loader!./snippets/13-immutable-lists.js')}
+/>
 
 ---
 
-#### Sets
+<CodeSurfer
+  title="Immutable Sets"
+  steps={[
+    {},
+    {
+      range: [1, 5],
+      notes: 'Creating and accessing information',
+    },
+    {
+      range: [3, 9],
+      notes: 'Updating',
+    },
+    {
+      range: [11, 14],
+      notes: 'Useful methods',
+    },
+  ]}
+  code={require('!raw-loader!./snippets/14-immutable-sets.js')}
+/>
 
 ---
 
