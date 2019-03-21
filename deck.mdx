@@ -541,7 +541,35 @@ Docs: https://immutable-js.github.io/immutable-js/
 
 ---
 
-#### Many more
+<CodeSurfer
+  title="Immutable Sequences (Seq)"
+  steps={[
+    {},
+    {
+      range: [1, 8],
+      notes: 'Create a long sequence of numbers',
+    },
+    {
+      range: [8, 14],
+      notes: 'Mapping, just like an array',
+    },
+    {
+      range: [8, 16],
+      notes: 'Sequences are lazy, so no operations are done right now',
+    },
+    {
+      range: [18, 24],
+      notes: 'Again, no operations done',
+    },
+    {
+      lines: [26],
+      notes:
+        'Queued operations are performed here, because a value has to be accessed',
+    },
+    {},
+  ]}
+  code={require('!raw-loader!./snippets/15-immutable-seq.js')}
+/>
 
 ---
 
