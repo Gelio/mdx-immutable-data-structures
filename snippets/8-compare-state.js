@@ -1,4 +1,4 @@
-const counterState = {
+let counterState = {
   value: 0,
   name: 'John',
 };
