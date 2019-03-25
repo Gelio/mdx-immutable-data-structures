@@ -180,6 +180,25 @@ Preferred solution = 1
 ---
 
 <CodeSurfer
+  title="Reminder about object spread order"
+  steps={[
+    {},
+    { range: [1, 4], notes: 'Base state' },
+    {
+      range: [6, 11],
+      notes: 'Correct update',
+    },
+    {
+      range: [13, 18],
+      notes: 'Incorrect update',
+    },
+  ]}
+  code={require('!raw-loader!./snippets/8-reminder-spread-order.js')}
+/>
+
+---
+
+<CodeSurfer
   title="Immutable updates in action"
   steps={[
     {},
@@ -607,6 +626,76 @@ Docs: https://immutable-js.github.io/immutable-js/
 4. `npx jest file.test.js --watch` to test a specific file
 
 https://immutable-js.github.io/immutable-js/docs/#/
+
+---
+
+<CodeSurfer
+  title="React with ImmutableJS"
+  steps={[
+    {},
+    {
+      lines: [5],
+      notes: 'Immutable Map is passed in as prop',
+    },
+    {},
+  ]}
+  code={require('!raw-loader!./snippets/16-immutablejs-in-react.jsx')}
+/>
+
+---
+
+<CodeSurfer
+  title="Implemented shouldComponentUpdate"
+  steps={[
+    {},
+    {
+      range: [4, 10],
+      notes:
+        'If shouldComponentUpdate returns false, the render method is not invoked',
+    },
+    {
+      notes: 'For multiple props the code may be lengthy',
+    },
+  ]}
+  code={require('!raw-loader!./snippets/17-react-should-component-update.jsx')}
+/>
+
+---
+
+<CodeSurfer
+  title="PureComponent"
+  steps={[
+    {},
+    {
+      lines: [1, 3],
+      notes:
+        'PureComponent implements shouldComponentUpdate with shallow props comparison',
+    },
+    {
+      notes: 'The rest of the code does not change',
+    },
+  ]}
+  code={require('!raw-loader!./snippets/18-react-pure-component.jsx')}
+/>
+
+---
+
+<CodeSurfer
+  title="React.memo for function component"
+  steps={[
+    {},
+    {
+      range: [3, 18],
+      notes: 'Regular function component',
+    },
+    {
+      lines: [20],
+      notes: 'React.memo is like PureComponent, but for function components',
+    },
+    {},
+  ]}
+  code={require('!raw-loader!./snippets/18-react-pure-component.jsx')}
+/>
 
 ---
 
